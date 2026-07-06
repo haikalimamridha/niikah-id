@@ -1,0 +1,262 @@
+@import url('https://fonts.googleapis.com/css2?family=Birthstone+Bounce:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic&family=Playfair+Display&family=Satisfy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Goudy+Bookletter+1911&display=swap');
+:root {
+    color-scheme: light only;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+#welcomeModal .modal-content {
+    background: url('https://wallpaperbat.com/img/164724-floral-pattern-wallpaper-12-1920-x-1200-vintage.jpg') no-repeat center;
+    background-color: hsl(349, 100%, 95%);
+    background-size: cover;
+}
+
+#welcomeModal .modal-body {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+}
+
+#welcomeModal .welcome-modal-body {
+    margin-top: 25vh;
+}
+
+#welcomeModal .initial-name {
+    font-size: 400%;
+}
+
+#welcomeModal .btn {
+    background-color: rgb(189, 152, 112);
+    border-radius: 25px;
+    font-weight: 500;
+}
+
+#main-content {
+    background-color: rgb(189, 152, 112);
+}
+
+.page {
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.page .btn {
+    border-radius: 25px;
+    font-weight: 500;
+    color: white;
+    border-color: rgba(255, 255, 255, 0);
+}
+
+.cover {
+    min-height: 100vh;
+    background-position: bottom center;
+    background-repeat: no-repeat;
+}
+
+#cover-title {
+    max-width: 750px;
+    background-color: rgb(255, 255, 255);
+    height: 100vh;
+    background-image: url(https://kondangankuy.com/wp-content/uploads/2020/11/back-atas-black-edition-768x681.png), url(https://kondangankuy.com/wp-content/uploads/2020/11/back-bawah-black-edition-768x530.png);
+    background-position: top, bottom;
+    background-repeat: no-repeat;
+    padding: 12;
+}
+
+#cover-title-content {
+    background-color: rgba(255, 255, 255, .9);
+    width: 90%;
+    min-height: 85%;
+    margin-top: -20;
+    border-style: solid;
+    border-width: 3px;
+    border-color: rgb(161, 133, 90);
+    font-family: 'Goudy Bookletter 1911', serif;
+    color: rgb(161, 133, 90);
+}
+
+#cover-undangan-pernikahan {
+    font-weight: bold;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+#cover-female {
+    font-size: 40px;
+    text-transform: uppercase;
+    margin: 0;
+    margin-top: 80px;
+    color: rgb(146, 103, 59);
+}
+
+.align-top {
+    margin-top: -20px;
+    color: rgb(146, 103, 59);
+}
+
+#cover-male {
+    text-transform: uppercase;
+    font-size: 40px;
+    vertical-align: top;
+}
+
+#cover-and {
+    font-size: 70px;
+    line-height: 83px;
+}
+
+#cover-date {
+    font-size: 30px;
+    margin-top: 50px;
+}
+
+.cover-title {
+    font-family: 'Birthstone Bounce';
+    font-size: 80px;
+    line-height: 75px;
+}
+
+.cover .container {
+    padding-top: 15vh;
+}
+
+.salam {
+    font-family: 'Satisfy', cursive;
+    font-size: 180%;
+    color: rgb(146, 103, 59);
+}
+
+.arabic {
+    font-family: 'Noto Naskh Arabic', serif;
+}
+
+.bride-name {
+    font-family: 'Satisfy', cursive;
+    font-size: 180%;
+}
+
+#brides-content {
+    padding: 70px 10px;
+    max-width: 750px;
+    background-color: white;
+    height: 100vh;
+    background-image: url(https://kondangankuy.com/wp-content/uploads/2020/11/back-atas-black-edition-768x681.png), url(https://kondangankuy.com/wp-content/uploads/2020/11/back-bawah-black-edition-768x530.png);
+    background-position: top, bottom;
+    background-repeat: no-repeat;
+}
+
+#brides-content-container {
+    background-color: rgba(255, 255, 255, .9);
+    width: 90%;
+    padding: 20px;
+    min-height: 85%;
+    margin-top: -20;
+    border-style: solid;
+    border-width: 3px;
+    border-color: rgb(161, 133, 90);
+    font-family: 'Goudy Bookletter 1911', serif;
+    color: rgb(161, 133, 90);
+}
+
+#comments {
+    background: url('images/brown-background.jpg') center no-repeat;
+    background-size: cover;
+    color: rgb(146, 103, 59)
+}
+
+#btn-send-comment {
+    background-color: rgb(146, 103, 59)
+}
+
+#events {
+    background: url('images/brown-background.jpg') center no-repeat;
+    background-size: cover;
+    color: rgb(146, 103, 59);
+}
+
+#quote {
+    background: url('images/brown-background.jpg') center no-repeat;
+    background-size: cover;
+    color: rgb(146, 103, 59);
+}
+
+#information {
+    background: url(https://wekita.id/wp-content/uploads/2021/07/Picture2-2.png) center bottom no-repeat;
+    background-size: cover;
+    background-color: white;
+    color: rgb(146, 103, 59);
+}
+
+.navbar {
+    height: 64px;
+}
+
+.navbar-light .navbar-brand {
+    color: rgb(189, 152, 112)!important;
+}
+
+.navbar-nav.navbar-center {
+    position: absolute;
+    left: 50%;
+    transform: translatex(-50%);
+}
+
+nav .nav-link {
+    text-align: center;
+    width: 70px;
+    color: rgb(189, 152, 112)!important;
+    font-weight: bolder;
+    padding: 0 !important;
+}
+
+nav .nav-link.active {
+    color: white;
+}
+
+.nav-link .nav-link-icon {
+    font-size: 16px;
+}
+
+.nav-link .nav-link-label {
+    margin-top: -3px;
+    font-size: 10px;
+}
+
+.navbar-collapse.collapse {
+    display: block !important;
+}
+
+
+/* screen small */
+
+@media screen and (max-width: 768px) {
+    .cover .container {
+        padding-top: 10vh;
+    }
+    .cover-title {
+        font-size: 65px;
+        line-height: 60px;
+    }
+}
+
+
+/* handle dark mode */
+
+@media (prefers-color-scheme: dark) {
+    #comments {
+        background: none !important;
+    }
+    #events {
+        background: none !important;
+    }
+    #quote {
+        background: none !important;
+    }
+    #information {
+        background: none !important;
+    }
+}

@@ -82,7 +82,7 @@ type Invitation struct {
 	TemplateName sql.NullString
 	IsPublished  bool
 	IsActive     bool
-	ExpiredAt    sql.NullTime
+	ExpiredAt    time.Time
 	CreatedAt    time.Time
 	UpdatedAt    time.Time
 }
@@ -186,6 +186,7 @@ type User struct {
 	Photo      sql.NullString
 	CreatedAt  time.Time
 	UpdatedAt  time.Time
+	ApiKey     string
 }
 
 type View struct {

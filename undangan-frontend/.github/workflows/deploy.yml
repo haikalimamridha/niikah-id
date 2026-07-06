@@ -1,0 +1,29 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy_job:
+    runs-on: ubuntu-latest
+    name: build&deploy
+    steps:
+      # To use this repository's private action, you must check out the repository
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install Dependencies
+        run: npm ci
+      - name: Build
+        run: npm run build
+
+      - name: deploy file to server
+        uses: wlixcc/SFTP-Deploy-Action@v1.0
+        with:
+          username: '${{ secrets.USERNAME }}'
+          server: '${{ secrets.HOST }}'
+          ssh_private_key: ${{ secrets.PRIVATE_KEY }}
+          local_path: './build/*'
+          remote_path: '/home/ubuntu/projects/undangan-dashboard'
+          args: '-o ConnectTimeout=5'

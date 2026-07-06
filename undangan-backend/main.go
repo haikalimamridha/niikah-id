@@ -8,7 +8,7 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/go-chi/cors"
 	"github.com/haikalimamridha/niikah/config"
-	"github.com/haikalimamridha/niikah/controllers/homecontroller"
+	"github.com/haikalimamridha/niikah/internal/auth"
 	"github.com/haikalimamridha/niikah/internal/database"
 	"github.com/haikalimamridha/niikah/internal/handler"
 	"github.com/joho/godotenv"
@@ -22,7 +22,8 @@ func main() {
 	db := config.ConnectDB()
 
 	apiCfg := &handler.ApiConfig{
-		DB: database.New(db),
+		DB:     database.New(db),
+		DBConn: db,
 	}
 
 	portString := os.Getenv("PORT")
@@ -36,8 +37,8 @@ func main() {
 	router := chi.NewRouter()
 
 	router.Use(cors.Handler(cors.Options{
-		AllowedOrigins:   []string{"https://*", "http://*"},
-		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowedOrigins:   []string{"http://localhost:3000"},
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH", "HANDLE"},
 		AllowedHeaders:   []string{"*"},
 		ExposedHeaders:   []string{"Link"},
 		AllowCredentials: false,
@@ -47,7 +48,34 @@ func main() {
 	v1Router := chi.NewRouter()
 	v1Router.Get("/healthz", handler.HandlerReadiness)
 	v1Router.Get("/err", handler.HandlerErr)
-	v1Router.Post("/register", apiCfg.HandlerCreateUser)
+	v1Router.Post("/auth/register", apiCfg.HandlerCreateUser)
+	v1Router.Post("/auth/login", apiCfg.HandlerLogin)
+	v1Router.Get("/users", apiCfg.HandleGetUser)
+	v1Router.Get("/templates", apiCfg.HandlerGetTemplates) //get all templates
+	v1Router.Get("/packages", apiCfg.HandlerGetPackages)   //get all packages (paket)
+	v1Router.Handle("/uploads/*", http.StripPrefix("/v1/uploads", http.FileServer(http.Dir("./uploads"))))
+	v1Router.Handle("/template/*", http.StripPrefix("/v1/template", http.FileServer(http.Dir("../template"))))
+
+	v1Router.Group(func(r chi.Router) {
+		r.Use(auth.AuthMiddleware)
+
+		r.Get("/auth/check", apiCfg.HandlerCheckAuth) //cek apakah token masih valid (valid 24 jam setelah login)
+
+		//dashboard beranda
+		r.Get("/stats/view-daily", apiCfg.HandlerDailyViewStats)     //pengunjung undangan
+		r.Get("/stats/city", apiCfg.HandlerCityStats)                //kota asal pengunjung
+		r.Get("/stats/comment", apiCfg.HandlerCommentStats)          //total ucapan
+		r.Get("/stats/guest", apiCfg.HandlerGuestStats)              //total tamu undangan
+		r.Get("/stats/invitation", apiCfg.HandlerInvitationStats)    //total undangan
+		r.Get("/stats/view", apiCfg.HandlerViewStats)                //total view undangan
+		r.Get("/stats/latest-comments", apiCfg.HandlerLatestComment) //ucapan terkini
+
+		r.Post("/invitations", apiCfg.HandlerCreateInvitation)         //membuat undangan
+		r.Patch("/invitations/{id}", apiCfg.HandlerUpdateInvitation)   //update undangan
+		r.Post("/validate/subdomain", apiCfg.HandlerValidateSubdomain) // check subdomain sudah dipakai atau belum
+		r.Get("/invitations", apiCfg.HandlerGetInvitation)             // menampilkan semua undangan yg dibuat user
+
+	})
 
 	router.Mount("/v1", v1Router)
 
@@ -57,7 +85,7 @@ func main() {
 	}
 
 	//1. Homepage
-	http.HandleFunc("/", homecontroller.Welcome)
+	// http.HandleFunc("/", homecontroller.Welcome)
 
 	// start the server
 	log.Printf("Server starting port %v", portString)

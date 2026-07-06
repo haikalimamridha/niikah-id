@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.6.1/font/bootstrap-icons.min.css" integrity="sha512-9a1QYep56cYgIPFq0JYfsh9xRYYmPBxKaD6/ZfVAtplQ6y9ZUSk7GxgC2dmwtxK9T2cGQOxCV6J2Ll51nrvP2w==" crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" integrity="sha512-1cK78a1o+ht2JcaW6g8OXYwqpev9+6GqOkz9xmBN9iUUhIndKtxwILGWYOSibOKjLsEdjyjZvYDq/cZwNeak0w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Nindy ❤️ Sidiq - Undangan niikah.id</title>
+</head>
+
+<body>
+
+    <div class="modal fade" id="welcomeModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-fullscreen modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <div class="container welcome-modal-body">
+                        <img src="images/flower-circle.png" style="height: 140px;" />
+                        <h1 class="initial-name animate__animated animate__pulse animate__slower" style="margin-top: -95px;">Cinta & Rangga</h1>
+                        <br>
+                        <br>
+                        <br>
+                        <h5 class="animate__animated animate__fadeIn animate__slower" style="font-weight: 400;">Kepada Bapak/Ibu/Saudara/i</h5>
+                        <h3 class="animate__animated animate__fadeIn animate__slower" id="guest-name"></h3>
+                        <h6 class="animate__animated animate__fadeIn animate__slower" style="font-weight: 400;">Kami mengundang Anda untuk hadir di acara pernikahan kami.</h6>
+                        <br>
+                        <br>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-book"></i> Buka Undangan</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content" id="main-content">
+
+        <button type="button" class="btn btn-outline-dark btn-sm" id="backToTopButton" style="position: fixed; bottom: 50px; right: 5px; z-index: 100; background-color: white; border-radius: 5px;" onclick="topFunction()">
+        <em class="bi bi-arrow-up"></em>
+      </button>
+        <button type="button" class="btn btn-outline-dark btn-sm" id="toggleMusicButton" style="position: fixed; bottom: 50px; right: 40px; z-index: 100; background-color: white; border-radius: 5px;" onclick="toggleMusic()">
+        <em id="toggleMusicOffButton" class="bi bi-pause-fill"></em>
+        <em id="toggleMusicOnButton" hidden class="bi bi-music-note"></em>
+      </button>
+
+        <div class="page cover" id="cover" style="background-image: url('images/background3.webp')">
+            <div class="container text-center d-none" id="cover-title">
+                <h1 class="cover-title animate__animated animate__fadeInDown animate__slower">Cinta<br>&<br>Rangga</h1>
+                <br>
+                <h5 class="animate__animated animate__fadeInDown animate__slower">4 November 2021</h5>
+            </div>
+        </div>
+
+        <div class="page brides" id="brides">
+            <div class="container text-center" style="padding: 70px 10px; max-width: 600px;">
+                <img src="images/bismillah.webp" height="50">
+                <p class="salam" data-aos="fade-down">Assalamu'alaikum Wr Wb.</p>
+                <p data-aos="fade-down">Tanpa mengurangi rasa hormat. Kami mengundang Bapak/Ibu/Saudara/i serta Kerabat sekalian untuk menghadiri acara pernikahan kami</p>
+                <img data-aos="fade-down" class="shadow-lg" src="images/man.webp" height="100" style="background-color: bisque; border-radius: 50%;">
+                <p data-aos="fade-down">
+                    <b class="bride-name">Rangga Sastrowardoyo</b>
+                    <br>
+                    <small>putra Bapak Fulan dan Ibu Fulanah</small>
+                </p>
+                <p>dan</p>
+                <img data-aos="fade-down" class="shadow-lg" src="images/woman.webp" height="100" style="background-color: bisque; border-radius: 50%;">
+                <p data-aos="fade-down">
+                    <b class="bride-name">Cinta Andarini Puspaningrum</b>
+                    <br>
+                    <small>putri Bapak Fulan dan Ibu Fulanah</small>
+                </p>
+            </div>
+        </div>
+
+        <div class="page events" id="events">
+            <div class="container text-center" style="padding: 70px 10px; max-width: 600px;">
+                <img src="images/flowers2.gif" height="100px" />
+                <br>
+                <br>
+                <h2 class="salam">Agenda Pernikahan</h2>
+                <br>
+                <div class="card shadow p-3 mb-5 bg-white rounded" data-aos="fade-down">
+                    <div>
+                        <img src="https://nikaa.id/assets/themes/icon/mempelai.png" height="30px" style="margin: 20px;" />
+                    </div>
+                    <h3>Akad Nikah dan Resepsi</h3>
+                    <p>
+                        <b>Kamis, 4 November 2021, pukul 08.00-selesai</b><br> Rumah Mempelai Wanita<br> Lojejer, Wuluhan, Jember<br>
+                    </p>
+                    <div>
+                        <a style="min-width: 100px;" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Nindy%20Sidiq%20Wedding&dates=20211104T080000+0700%2F20211104T120000+0700" role="button" class="btn btn-outline-dark btn-sm">Buat Pengingat</a>
+                        <a style="min-width: 100px;" href="https://maps.app.goo.gl/3e25Y493T5tayvFw5" target="_blank" role="button" class="btn btn-outline-dark btn-sm">Lihat Peta</a>
+                    </div>
+                </div>
+                <br>
+                <div class="card shadow p-3 mb-5 bg-white rounded" data-aos="fade-down">
+                    <div>
+                        <img src="https://nikaa.id/assets/themes/icon/home.png" height="30px" style="margin: 20px;" />
+                    </div>
+                    <h3>Ngunduh Mantu</h3>
+                    <p>
+                        <b>Minggu, 7 November 2021, pukul 13.00-selesai</b><br> Rumah Mempelai Pria<br> Gempolsari, Tanggulangin, Sidoarjo<br>
+                    </p>
+                    <div>
+                        <a style="min-width: 100px;" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Nindy%20Sidiq%20Wedding&dates=20211107T110000+0700%2F20211107T120000+0700" role="button" class="btn btn-outline-dark btn-sm">Buat Pengingat</a>
+                        <a style="min-width: 100px;" href="https://maps.app.goo.gl/g6a3g9CnSc3tveJR9" target="_blank" role="button" class="btn btn-outline-dark btn-sm">Lihat Peta</a>
+                    </div>
+                </div>
+
+                <br>
+                <div class="container countdown text-center" id="countdown" data-aos="fade-down">
+                    <b>Menuju Akad Nikah dan Resepsi</b>
+                    <div class="row row-cols-4 text-center" style="margin-top: 10px;">
+                        <div style="background-color: white; border-radius: 20px; max-width: 75px; padding: 5px; margin: auto" class="col shadow"><b><span id="countdown-day">0</span></b> <br> hari</div>
+                        <div style="background-color: white; border-radius: 20px; max-width: 75px; padding: 5px; margin: auto" class="col shadow"><b><span id="countdown-hour">0</span></b> <br> jam</div>
+                        <div style="background-color: white; border-radius: 20px; max-width: 75px; padding: 5px; margin: auto" class="col shadow"><b><span id="countdown-minute">0</span></b> <br> menit</div>
+                        <div style="background-color: white; border-radius: 20px; max-width: 75px; padding: 5px; margin: auto" class="col shadow"><b><span id="countdown-second">0</span></b> <br> detik</div>
+                    </div>
+                </div>
+
+
+                <div class="card shadow p-3 mb-5 bg-white rounded" style="margin-top: 50px;" data-aos="fade-down">
+                    <iframe width="100%" height="350px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/place?key=AIzaSyB_GLt-G4wlKVoAMH-6NrVcO84-1VWAoVU
+              &q=-8.362681,113.513280">
+            </iframe>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- <div class="page gallery" id="gallery" style=" background-color: aliceblue;">
+        <div class="container text-center" style="padding: 70px 0px;">
+          <h2>Galeri</h2>
+        </div>
+      </div>
+  
+      <div class="page live-video" id="live-video">
+        <div class="container text-center" style="padding: 70px 0px;">
+          <h2>Live Video</h2>
+        </div>
+      </div> -->
+
+        <div id="quote">
+            <div class="container text-center" style="padding: 70px 10px; max-width: 500px;" data-aos="fade-down">
+                <img src="images/flowers.gif" height="150px" />
+                <br>
+                <br>
+                <p class="arabic">
+                    وَمِنۡ ءَايَٰتِهِۦٓ أَنۡ خَلَقَ لَكُم مِّنۡ أَنفُسِكُمۡ أَزۡوَٰجٗا لِّتَسۡكُنُوٓاْ إِلَيۡهَا وَجَعَلَ بَيۡنَكُم مَّوَدَّةٗ وَرَحۡمَةًۚ إِنَّ فِي ذَٰلِكَ لَأٓيَٰتٖ لِّقَوۡمٖ يَتَفَكَّرُونَ
+                </p>
+                <small>
+            Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang berfikir. (Q.S. Ar-Rum ayat 21)
+          </small>
+            </div>
+        </div>
+
+        <div class="page comments" id="comments">
+            <div class="container text-center" style="padding: 70px 10px; max-width: 500px;">
+                <h2>Ucapan</h2>
+
+                <div class="mb-4">
+
+                    <div class="wrapper-ucapan" style="margin: 10px;" data-aos="fade-down">
+                        <div class="form-block w-form">
+                            <form id="comment-form" name="comment-form" data-name="Comment Form" class="form-ucapan">
+                                <label for="name" class="form-label">Nama</label>
+                                <input type="text" class="form-control" maxlength="256" name="name" data-name="Name" placeholder="Masukkan nama kamu" id="name" required="" />
+                                <label for="ucapan" class="form-label">Masukkan ucapanmu</label>
+                                <textarea name="pesan" placeholder="Berikan ucapan terbaikmu untuk calon mempelai" id="pesan" cols="30" rows="" required="" class="form-control">
+                  </textarea>
+                                <input type="submit" value="Kirim Ucapan" data-wait="Please wait..." class="btn btn-primary" style="margin-top: 10px;" />
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="wrapper-comment" style="margin: 30px;" data-aos="fade-down">
+                        <div class="card">
+                            <div class="card-body">
+                                This is some text within a card body.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="page information" id="information" style="background: url(https://wekita.id/wp-content/uploads/2021/07/Picture2-2.png) center bottom no-repeat; background-size: cover">
+            <div class="container text-center" style="padding: 70px 10px;max-width: 500px;">
+                <h2>Informasi</h2>
+                <p>Guna mencegah penyebaran Covid-19, diharapkan bagi tamu undangan untuk mematuhi Protokol Kesehatan di bawah ini :</p>
+
+                <div class="container" style="padding: 30px; max-width: 500px;">
+                    <div class="row">
+                        <div class="col-4" data-aos="flip-up">
+                            <img class="img-fluid" src="https://wekita.id/wp-content/uploads/2021/07/01-14-1.png" style="width: 100px;">
+                            <small>Cuci Tangan</small>
+                        </div>
+                        <div class="col-4" data-aos="flip-up">
+                            <img class="img-fluid" src="https://wekita.id/wp-content/uploads/2021/07/04-15.png" style="width: 100px;">
+                            <small>Gunakan Masker</small>
+                        </div>
+                        <div class="col-4" data-aos="flip-up">
+                            <img class="img-fluid" src="https://wekita.id/wp-content/uploads/2021/07/06-3.png" style="width: 100px;">
+                            <small>Jaga Jarak</small>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4" data-aos="flip-down">
+                            <img class="img-fluid" src="https://wekita.id/wp-content/uploads/2021/07/05-10.png" style="width: 100px;">
+                            <small>Tidak Bersalaman</small>
+                        </div>
+                        <div class="col-4" data-aos="flip-down">
+                            <img class="img-fluid" src="https://wekita.id/wp-content/uploads/2021/07/02-15-1.png" style="width: 100px;">
+                            <small>Gunakan Handsanitizer</small>
+                        </div>
+                        <div class="col-4" data-aos="flip-down">
+                            <img class="img-fluid" src="https://wekita.id/wp-content/uploads/2021/07/03-9.png" style="width: 100px;">
+                            <small>Hindari Kerumunan</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container" style="margin-top: 300px;">
+                    <small>provided by</small>
+                    <br>
+                    <a href="https://www.instagram.com/niikah.id/" target="_blank">
+                        <img src="images/logo.png" height="40">
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <div style="height: 46px;">
+            <!-- empty div under the bottom navbar -->
+        </div>
+
+        <audio hidden controls loop id="backroundMusic" src="audios/background.mp3"></audio>
+
+        <nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark" style="display: flex; justify-content: center; z-index: 100;">
+
+            <a class="navbar-brand d-none d-md-block" href="#" style="margin-left: 16px; position: absolute; bottom: 4px; left: 16px;">
+          Cinta <small>❤️</small>&nbsp;&nbsp;Rangga
+        </a>
+
+            <ul class="nav text-nowrap flex-nowrap" style="overflow-x: auto;">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#cover">
+                        <div class="nav-link-icon">
+                            <em class="bi bi-book"></em>
+                        </div>
+                        <div class="nav-link-label">
+                            Sampul
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#brides">
+                        <div class="nav-link-icon">
+                            <em class="bi bi-heart"></em>
+                        </div>
+                        <div class="nav-link-label">
+                            Mempelai
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#events">
+                        <div class="nav-link-icon">
+                            <em class="bi bi-calendar"></em>
+                        </div>
+                        <div class="nav-link-label">
+                            Acara
+                        </div>
+                    </a>
+                </li>
+                <!-- <li class="nav-item">
+            <a class="nav-link" href="#gallery">
+              <div class="nav-link-icon">
+                <em class="bi bi-image"></em>
+              </div>
+              <div class="nav-link-label">
+                Galeri
+              </div>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#live-video">
+              <div class="nav-link-icon">
+                <em class="bi bi-camera-video"></em>
+              </div>
+              <div class="nav-link-label">
+                Video
+              </div>
+            </a>
+          </li> -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#comments">
+                        <div class="nav-link-icon">
+                            <em class="bi bi-chat-square-quote"></em>
+                        </div>
+                        <div class="nav-link-label">
+                            Ucapan
+                        </div>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#information">
+                        <div class="nav-link-icon">
+                            <em class="bi bi-info-circle"></em>
+                        </div>
+                        <div class="nav-link-label">
+                            Informasi
+                        </div>
+                    </a>
+                </li>
+            </ul>
+
+        </nav>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js" integrity="sha512-nnzkI2u2Dy6HMnzMIkh7CPd1KX445z38XIu4jG1jGw7x5tSL3VBjE44dY4ihMU1ijAQV930SPM12cCFrB18sVw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js" integrity="sha512-OvBgP9A2JBgiRad/mM36mkzXSXaJE9BEIENnVEmeZdITvwT09xnxLtT4twkCa8m/loMbPHsvPl0T8lRGVBwjlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" integrity="sha512-A7AYk1fGKX6S2SsHywmPkrnzTZHrgiVT7GcQkLGDe2ev0aWb8zejytzS8wjo7PGEXKqJOrjQ4oORtnimIRZBtw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        document.addEventListener('contextmenu', event => event.preventDefault());
+
+        /* View in fullscreen */
+        var elem = document.documentElement;
+
+        function openFullscreen() {
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.webkitRequestFullscreen) { /* Safari */
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) { /* IE11 */
+                elem.msRequestFullscreen();
+            }
+        }
+
+        /* Scroll to top button handler */
+        function topFunction() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
+
+        var isMusicOn = true;
+
+        function toggleMusic() {
+            const audio = document.querySelector("audio");
+            const offButton = document.querySelector("#toggleMusicOffButton");
+            const onButton = document.querySelector("#toggleMusicOnButton");
+            isMusicOn = !isMusicOn;
+            if (isMusicOn) {
+                audio.play();
+                offButton.removeAttribute("hidden");
+                onButton.setAttribute("hidden", true);
+            } else {
+                audio.pause();
+                onButton.removeAttribute("hidden");
+                offButton.setAttribute("hidden", true);
+            }
+        }
+
+        $(document).ready(function() {
+            var subdomain = window.location.host.split('.')[1] ? window.location.host.split('.')[0] : '';
+            var guestCode = window.location.href.split('/')[window.location.href.split('/').length - 1] ? window.location.href.split('/')[window.location.href.split('/').length - 1] : '';
+            var currentGuestName = null;
+            // subdomain = 'nindysidiq';
+            // guestCode = 'cbbt';
+            if (subdomain && guestCode) {
+                $.get(`https://api.niikah.id/api/guests/${subdomain}-${guestCode}`, function(data, status) {
+                    if (status === 'success' && data && data.item && data.item.name) {
+                        document.getElementById("guest-name").innerHTML = data.item.name;
+                        document.getElementById("name").value = data.item.name;
+                        document.getElementById("name").disabled = true;
+                        currentGuestName = data.item.name;
+                    }
+                });
+            }
+
+            $("#welcomeModal").modal('show');
+            $("#welcomeModal").on("hidden.bs.modal", function() {
+                $("#cover-title").removeClass("d-none");
+                openFullscreen();
+                wd = AOS.init();
+
+                // starting background music
+                const audio = document.querySelector("audio");
+                audio.volume = 0.4;
+                audio.play();
+            });
+
+            // Check if element is scrolled into view
+            function isScrolledIntoView(elem) {
+                var docViewTop = $(window).scrollTop();
+                var docViewBottom = docViewTop + $(window).height();
+
+                var elemTop = $(elem).offset().top;
+                var elemBottom = elemTop + $(elem).height();
+
+                return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+            }
+
+            // If element is scrolled into view, fade it in
+            $(window).scroll(function() {
+                $('.scroll-animations .animated').each(function() {
+                    if (isScrolledIntoView(this) === true) {
+                        $(this).addClass('fadeInLeft');
+                    }
+                });
+            });
+
+            // change active menu on click
+            $("nav .nav-link").on("click", function() {
+                $("nav").find(".active").removeClass("active");
+                $(this).addClass("active");
+            });
+
+            // change active menu on scroll
+            $(window).on('scroll', function(event) {
+                var scrollPos = $(document).scrollTop();
+                $(".nav li a").each(function() {
+                    var currLink = $(this);
+                    var refElement = $(currLink.attr("href"));
+
+                    if (refElement.position().top <= scrollPos && refElement.position().top + refElement.height() > scrollPos) {
+                        currLink.addClass("active").siblings().removeClass("active");
+                        return;
+                    } else {
+                        currLink.removeClass("active");
+                    }
+                })
+            });
+
+            // handle countdown
+            var countDownDate = new Date("2021-11-04T08:00:00.000+07:00").getTime();
+
+            // Update the count down every 1 second
+            var x = setInterval(function() {
+                // Get today's date and time
+                var now = new Date().getTime();
+
+                // Find the distance between now and the count down date
+                var distance = countDownDate - now;
+
+                // Time calculations for days, hours, minutes and seconds
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Display the result in the element with id="demo"
+                document.getElementById("countdown-day").innerHTML = days;
+                document.getElementById("countdown-hour").innerHTML = hours;
+                document.getElementById("countdown-minute").innerHTML = minutes;
+                document.getElementById("countdown-second").innerHTML = seconds;
+
+                // If the count down is finished, hide it
+                if (distance < 0) {
+                    clearInterval(x);
+                    document.getElementById("countdown").setAttribute("hidden", true);
+                }
+            }, 1000);
+
+
+            function loadComments() {
+                $('.wrapper-comment').html("");
+                $.get('https://api.niikah.id/api/comments?invitation_id=12', function(data, status) {
+                    if (status === 'success') {
+                        data.items.forEach((comment) => {
+                            $('.wrapper-comment').append(`
+                  <div class="card" style="margin-bottom: 5px">
+                    <div class="card-body">
+                      ${comment.comment} <br>
+                      <b><small>dari ${comment.name}</small></b>
+                    </div>
+                  </div>`);
+                        });
+                    }
+                });
+            }
+
+            $('#comment-form').submit(function(event) {
+                event.preventDefault();
+                const name = $('#name').val()
+                const comment = $('#pesan').val()
+                $.ajax({
+                    method: 'POST',
+                    url: 'https://api.niikah.id/api/comments',
+                    success: function() {
+                        $('#name').val('');
+                        $('#pesan').val('');
+                        loadComments();
+                    },
+                    data: {
+                        invitation_id: 12,
+                        name,
+                        comment,
+                    },
+                })
+            });
+
+            loadComments();
+
+            $.ajax({
+                method: 'POST',
+                url: 'https://api.niikah.id/api/views',
+                data: {
+                    invitation_id: 12
+                }
+            });
+
+        });
+    </script>
+</body>
+
+</html>

@@ -19,7 +19,7 @@ INSERT INTO users (
 ) VALUES (
     $1, $2, $3, $4
 )
-RETURNING id, email, password, name, role, phone, is_verified, photo, created_at, updated_at
+RETURNING id, email, password, name, role, phone, is_verified, photo, created_at, updated_at, api_key
 `
 
 type CreateUserParams struct {
@@ -48,6 +48,7 @@ func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) (User, e
 		&i.Photo,
 		&i.CreatedAt,
 		&i.UpdatedAt,
+		&i.ApiKey,
 	)
 	return i, err
 }
@@ -62,8 +63,31 @@ func (q *Queries) DeleteUser(ctx context.Context, id int32) error {
 	return err
 }
 
+const getUserByApiKey = `-- name: GetUserByApiKey :one
+SELECT id, email, password, name, role, phone, is_verified, photo, created_at, updated_at, api_key FROM users WHERE api_key = $1
+`
+
+func (q *Queries) GetUserByApiKey(ctx context.Context, apiKey string) (User, error) {
+	row := q.db.QueryRowContext(ctx, getUserByApiKey, apiKey)
+	var i User
+	err := row.Scan(
+		&i.ID,
+		&i.Email,
+		&i.Password,
+		&i.Name,
+		&i.Role,
+		&i.Phone,
+		&i.IsVerified,
+		&i.Photo,
+		&i.CreatedAt,
+		&i.UpdatedAt,
+		&i.ApiKey,
+	)
+	return i, err
+}
+
 const getUserByEmail = `-- name: GetUserByEmail :one
-SELECT id, email, password, name, role, phone, is_verified, photo, created_at, updated_at
+SELECT id, email, password, name, role, phone, is_verified, photo, created_at, updated_at, api_key
 FROM users
 WHERE email = $1
 LIMIT 1
@@ -83,12 +107,13 @@ func (q *Queries) GetUserByEmail(ctx context.Context, email string) (User, error
 		&i.Photo,
 		&i.CreatedAt,
 		&i.UpdatedAt,
+		&i.ApiKey,
 	)
 	return i, err
 }
 
 const getUserByID = `-- name: GetUserByID :one
-SELECT id, email, password, name, role, phone, is_verified, photo, created_at, updated_at
+SELECT id, email, password, name, role, phone, is_verified, photo, created_at, updated_at, api_key
 FROM users
 WHERE id = $1
 LIMIT 1
@@ -108,12 +133,13 @@ func (q *Queries) GetUserByID(ctx context.Context, id int32) (User, error) {
 		&i.Photo,
 		&i.CreatedAt,
 		&i.UpdatedAt,
+		&i.ApiKey,
 	)
 	return i, err
 }
 
 const listUsers = `-- name: ListUsers :many
-SELECT id, email, password, name, role, phone, is_verified, photo, created_at, updated_at
+SELECT id, email, password, name, role, phone, is_verified, photo, created_at, updated_at, api_key
 FROM users
 ORDER BY id
 `
@@ -138,6 +164,7 @@ func (q *Queries) ListUsers(ctx context.Context) ([]User, error) {
 			&i.Photo,
 			&i.CreatedAt,
 			&i.UpdatedAt,
+			&i.ApiKey,
 		); err != nil {
 			return nil, err
 		}

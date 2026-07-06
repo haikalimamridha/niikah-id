@@ -1,0 +1,410 @@
+@import url('https://fonts.googleapis.com/css2?family=Birthstone+Bounce:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic&family=Playfair+Display&family=Satisfy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+#welcomeModal .modal-content {
+    background: url('../images/bg-plain-beige.jpg') no-repeat center;
+    background-size: cover;
+}
+
+#welcomeModal .modal-body {
+    background-color: #f7f7e372;
+    color: #a58a5e;
+}
+
+#welcomeModal .welcome-modal-body {
+    margin-top: 25vh;
+}
+
+.initial-name {
+    font-family: 'Birthstone Bounce';
+    text-shadow: 2px 2px 3px #9d9473;
+}
+
+#welcomeModal .initial-name {
+    font-size: 300%;
+    color: #605751;
+}
+
+#welcomeModal .btn {
+    background-color: #a58a5e;
+    border-radius: 25px;
+    border-color: #88724d;
+    font-weight: 500;
+}
+
+#main-content {
+    background: linear-gradient( rgba(88, 113, 45, 0.361), rgba(66, 66, 66, 0.373)), url('../images/bg-plain-beige.jpg');
+}
+
+.page,
+.page-no-vh {
+    align-items: center;
+    justify-content: center;
+    max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: -5px 0 5px -5px #333, 5px 0 5px -5px #333;
+}
+
+.page {
+    min-height: 100vh;
+}
+
+.page .btn {
+    background-color: #a58a5e;
+    border-radius: 25px;
+    font-weight: 500;
+    color: white;
+    border-color: rgba(255, 255, 255, 0);
+}
+
+.btn-custom {
+    background-color: #a58a5e;
+    border-radius: 25px;
+    font-weight: 500;
+    color: white;
+    border-color: rgba(255, 255, 255, 0);
+}
+
+.cover {
+    min-height: 100vh;
+    background-position: bottom center;
+    background-repeat: no-repeat;
+}
+
+#cover-title {
+    background-color: rgb(255, 255, 255);
+    height: 100vh;
+    padding: 0;
+}
+
+#cover-title-image {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 50vh;
+}
+
+#cover-title-content {
+    /* background: radial-gradient(circle at 50% -80%, transparent 50%, #6960349a 55%, #696034 60%, #797041, #9e935f); */
+    background-image: url('../images/background-plain.webp');
+    height: 100vh;
+    margin-top: -10vh;
+    padding-top: 10vh;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #4F576E;
+}
+
+#cover-title-header {
+    position: relative;
+    height: 10vh;
+}
+
+#cover-header-right {
+    position: absolute;
+    right: 0;
+    height: 100%;
+    width: 60%;
+    background-position: right -3px top -2px;
+    background-image: url('../images/img-right-top_prev_ui.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+#cover-title-footer {
+    position: relative;
+    height: 45vh;
+    margin-top: -45vh;
+}
+
+@keyframes shake-1 {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+    25% {
+        transform: rotate(-4deg) scale(1.05);
+    }
+    50% {
+        transform: rotate(-8deg) scale(1.1);
+    }
+    75% {
+        transform: rotate(-4deg) scale(1.05);
+    }
+    100% {
+        transform: rotate(0deg) scale(1);
+    }
+}
+
+@keyframes shake-2 {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+    25% {
+        transform: rotate(4deg) scale(1.05);
+    }
+    50% {
+        transform: rotate(8deg) scale(1.1);
+    }
+    75% {
+        transform: rotate(4deg) scale(1.05);
+    }
+    100% {
+        transform: rotate(0deg) scale(1);
+    }
+}
+
+#corner-bottom-left {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    overflow: hidden;
+    height: 100%;
+    width: 45%;
+    background-size: contain;
+    background-image: url('../images/img-left_prev_ui.png');
+    background-position: left 0px bottom 0px;
+    background-repeat: no-repeat;
+}
+
+
+/* #corner-bottom-left::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/img-left_prev_ui.png');
+    background-size: contain;
+    background-position: left -20px bottom -10px;
+    background-repeat: no-repeat;
+    animation-name: shake-1;
+    animation-duration: 5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+} */
+
+#corner-bottom-left-2 {
+    position: absolute;
+    overflow: hidden;
+    left: 0;
+    bottom: 0;
+    height: 80%;
+    width: 30%;
+}
+
+#corner-bottom-left-2::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/img-left_prev_ui.png');
+    background-size: contain;
+    background-position: left -20px bottom -10px;
+    background-repeat: no-repeat;
+    animation-name: shake-2;
+    animation-duration: 5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+#corner-bottom-right {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    height: 100%;
+    width: 45%;
+    background-size: contain;
+    background-image: url('../images/img-right.png');
+    background-position: right 0px bottom 0px;
+    background-repeat: no-repeat;
+}
+
+
+/* #corner-bottom-right::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 80%;
+    background-image: url('../images/corner-decor-right.png');
+    background-size: contain;
+    background-position: right -20px bottom -10px;
+    background-repeat: no-repeat;
+    animation-name: shake-2;
+    animation-duration: 5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+} */
+
+#corner-bottom-right-2 {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    height: 80%;
+    width: 40%;
+}
+
+#corner-bottom-right-2::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 80%;
+    background-image: url('../images/corner-decor-right-2.png');
+    background-size: contain;
+    background-position: right -20px bottom -10px;
+    background-repeat: no-repeat;
+    animation-name: shake-1;
+    animation-duration: 5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+#btn-lihat-acara {
+    margin-top: 30px;
+    background-color: #a58a5e;
+}
+
+#cover-title-couple-name {
+    font-family: 'Great Vibes', cursive;
+    font-size: 300%;
+    color: #4F576E;
+}
+
+#cover-countdown {
+    max-width: 400px;
+    padding-top: 10px;
+}
+
+.cover-countdown-pane {
+    background-color: rgb(231, 211, 195);
+    color: rgb(66, 66, 66);
+    border-radius: 10px;
+    max-width: 75px;
+    margin: auto;
+    line-height: 15px;
+    padding: 5px;
+    z-index: 10;
+}
+
+.cover-countdown-pane p {
+    margin: 0;
+}
+
+.cover .container {
+    padding-top: 5vh;
+}
+
+.salam {
+    font-family: 'Satisfy', cursive;
+    font-size: 180%;
+}
+
+.arabic {
+    font-family: 'Noto Naskh Arabic', serif;
+}
+
+.bride-name {
+    font-family: 'Great Vibes', cursive;
+    font-size: 180%;
+    color: #39332e;
+    text-shadow: 1px 1px 3px #857e64;
+}
+
+#brides {
+    background: linear-gradient(0deg, #e4d69071, #9e945fc4), url('../images/bg-green.jpg');
+    background-size: cover;
+}
+
+#gallery {
+    background: linear-gradient(0deg, #e4d69071, #9e945fc4), url('../images/bg-green.jpg');
+    background-size: cover;
+}
+
+#gallery .photo {
+    width: 100%;
+    height: 160px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+#comments {
+    background: url('../images/bg-green.jpg') center no-repeat;
+    background-size: 100%;
+    background-size: cover;
+}
+
+#events {
+    background: linear-gradient(0deg, #9e945f8a, #e4d69071), url('../images/bg-green-2.jpg');
+    background-size: cover;
+}
+
+#quote {
+    background: linear-gradient(0deg, #e4d69071, #9e945fc4), url('../images/bg-green.jpg');
+    background-size: cover;
+}
+
+#information {
+    background: url('../images/background-plain-bottom.webp') center bottom no-repeat;
+    background-size: cover;
+}
+
+.navbar {
+    height: 46px;
+    background-color: #39332e;
+}
+
+.navbar-nav.navbar-center {
+    position: absolute;
+    left: 50%;
+    transform: translatex(-50%);
+}
+
+nav .nav-link {
+    text-align: center;
+    width: 70px;
+    color: grey;
+    padding: 0 !important;
+}
+
+nav .nav-link.active {
+    color: white;
+}
+
+.nav-link .nav-link-icon {
+    font-size: 16px;
+}
+
+.nav-link .nav-link-label {
+    margin-top: -3px;
+    font-size: 10px;
+}
+
+.navbar-collapse.collapse {
+    display: block !important;
+}
+
+
+/* screen small */
+
+@media screen and (max-width: 768px) {
+    .cover .container {
+        padding-top: 5vh;
+    }
+    .cover-title {
+        font-size: 65px;
+        line-height: 60px;
+    }
+}

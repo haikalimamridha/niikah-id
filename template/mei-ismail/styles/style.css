@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Birthstone+Bounce:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic&family=Playfair+Display&family=Satisfy&display=swap');
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+#welcomeModal .modal-content {
+  background: url('../images/modal-background.webp') no-repeat center;
+  background-color: hsl(349, 100%, 95%);
+  background-size: cover;
+}
+
+#welcomeModal .modal-body {
+  background-color: rgba(0,0,0,0.6);
+  color: white;
+}
+
+#welcomeModal .welcome-modal-body {
+  margin-top: 25vh;  
+}
+
+.initial-name {
+  font-family: 'Birthstone Bounce';
+}
+
+#welcomeModal .initial-name {
+  font-size: 300%;
+}
+
+#welcomeModal .btn {
+  background-color: rgb(255, 97, 124);
+  border-radius: 25px;
+  font-weight: 500;
+}
+
+.page {
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.page .btn {
+  background-color: rgb(255, 97, 124);
+  border-radius: 25px;
+  font-weight: 500;
+  color: white;
+  border-color: rgba(255, 255, 255, 0);
+}
+
+.cover {
+  min-height: 100vh;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+}
+
+.cover-title {
+  font-family: 'Birthstone Bounce';
+  font-size: 80px;
+  line-height: 75px;
+}
+
+.cover .container {
+  padding-top: 15vh;
+}
+
+.salam {
+  font-family: 'Satisfy', cursive;
+  font-size: 180%;
+}
+
+.arabic {
+  font-family: 'Noto Naskh Arabic', serif;
+}
+
+.bride-name {
+  font-family: 'Satisfy', cursive;
+  font-size: 180%;
+}
+
+#brides {
+  background: url('../images/background-plain.webp') center no-repeat;
+  background-color: white; 
+  background-size: 100%;
+}
+
+#comments {
+  background: url('../images/background-plain.webp') center no-repeat;
+  background-color: white; 
+  background-size: 100%;
+}
+
+#events {
+  background: url('../images/background-plain.webp') center no-repeat;
+  background-color: white; 
+  background-size: cover;
+}
+
+#quote {
+  background: url('../images/background-plain.webp') center no-repeat;
+  background-color: white; 
+  background-size: cover;
+}
+
+#information {
+  background: url('../images/background-plain-bottom.webp') center bottom no-repeat; 
+  background-size: cover;
+}
+
+.navbar {
+  height: 46px;
+}
+
+.navbar-nav.navbar-center {
+  position: absolute;
+  left: 50%;
+  transform: translatex(-50%);
+}
+
+nav .nav-link {
+  text-align: center;
+  width: 70px;
+  color: grey;
+  padding: 0 !important;
+}
+
+nav .nav-link.active {
+  color: white;
+}
+
+.nav-link .nav-link-icon {
+  font-size: 16px;
+}
+
+.nav-link .nav-link-label {
+  margin-top: -3px;
+  font-size: 10px;
+}
+
+.navbar-collapse.collapse {
+  display: block !important;
+}
+
+
+
+/* screen small */
+@media screen and (max-width: 768px) {
+  .cover .container {
+    padding-top: 10vh;
+  }
+
+  .cover-title {
+    font-size: 65px;
+    line-height: 60px;
+  }
+}

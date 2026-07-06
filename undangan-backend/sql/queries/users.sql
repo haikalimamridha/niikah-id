@@ -9,6 +9,9 @@ INSERT INTO users (
 )
 RETURNING *;
 
+-- name: GetUserByApiKey :one
+SELECT * FROM users WHERE api_key = $1;
+
 
 -- name: GetUserByID :one
 SELECT *
