@@ -26,7 +26,7 @@
                 <div class="modal-body text-center">
                     <div class="container welcome-modal-body">
                         <div style="height: 120px;"></div>
-                        <h1 class="initial-name animate__animated animate__pulse animate__slower" style="margin-top: -95px;">Cinta & Rangga</h1>
+                        <h1 class="initial-name animate__animated animate__pulse animate__slower" id="welcome-title" style="margin-top: -95px;">Cinta & Rangga</h1>
                         <br>
                         <br>
                         <br>
@@ -346,6 +346,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" integrity="sha512-A7AYk1fGKX6S2SsHywmPkrnzTZHrgiVT7GcQkLGDe2ev0aWb8zejytzS8wjo7PGEXKqJOrjQ4oORtnimIRZBtw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         document.addEventListener('contextmenu', event => event.preventDefault());
+
+
+        // tambahhhhhhh----------------
+        function renderInvitation(data) {
+
+            if (!data) return;
+
+            // Cover
+            document.getElementById("welcome-title").innerText = data.male_name +" & "+ data.female_name || "";
+            document.getElementById("cover-female").innerText = data.female_name || "";
+            document.getElementById("cover-male").innerText = data.male_name || "";
+            // document.getElementById("cover-date").innerText = data.event_date || "";
+
+        }
+
+        window.addEventListener("message", (event) => {
+            renderInvitation(event.data)
+        });
+
+        //---------------------------------------
 
         /* View in fullscreen */
         var elem = document.documentElement;

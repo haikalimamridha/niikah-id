@@ -1,7 +1,7 @@
 import find from 'lodash-es/find';
 import { Icon } from '@iconify/react';
 import { useQueryClient, useMutation } from 'react-query';
-import { useState, useMemo, Fragment } from 'react';
+import { useState, useMemo, Fragment, useRef, useEffect } from 'react';
 import {
   Stack,
   Typography,
@@ -125,7 +125,7 @@ export default function InvitationDetails({ data }) {
   const previewUrl = useMemo(() => {
     const activeTemp = find(templates, { name: values.template_name });
     if (activeTemp) {
-      return assetsRemoteUrl(activeTemp.screenshoot);
+      return assetsRemoteUrl(activeTemp.preview);
     }
 
     return null;
@@ -153,6 +153,39 @@ export default function InvitationDetails({ data }) {
   };
 
   const isExpired = data?.expired_at ? new Date() > new Date(data.expired_at) : false;
+  const iframeRef = useRef(null);
+
+  // cobaaaa
+  useEffect(() => {
+    if (!iframeRef.current) return;
+
+    iframeRef.current.contentWindow.postMessage(
+      {
+        title: values.title,
+        male_name: values.male_name,
+        female_name: values.female_name,
+        male_parents: values.male_parents,
+        female_parents: values.female_parents,
+        male_nickname: values.male_nickname,
+        female_nickname: values.female_nickname,
+
+        url_photo_male:
+          malePhoto
+            ? URL.createObjectURL(malePhoto)
+            : assetsRemoteUrl(values.url_photo_male),
+
+        url_photo_female:
+          femalePhoto
+            ? URL.createObjectURL(femalePhoto)
+            : assetsRemoteUrl(values.url_photo_female),
+
+        event_date: values.event_date,
+        address: values.address,
+        map_embed: values.map_embed,
+      },
+      "*"
+    );
+  }, [values, malePhoto, femalePhoto]);
 
   return (
     <Fragment>
@@ -293,11 +326,52 @@ export default function InvitationDetails({ data }) {
                         />
                       </Stack>
                     </Grid>
+                    {/* <Grid item xs={12} lg={6}>
+                      <Typography variant="h6" gutterBottom> 
+                        Preview Undangan
+                      </Typography>
+                      <ImagePreview sx={{ width: '100%', height: 580 }} loading="lazy" src={previewUrl} /> #diganti dari image preview menjadi iframe(html)
+                    </Grid> */}
                     <Grid item xs={12} lg={6}>
                       <Typography variant="h6" gutterBottom>
                         Preview Undangan
                       </Typography>
-                      <ImagePreview sx={{ width: '100%', height: 580 }} loading="lazy" src={previewUrl} />
+                      <Box
+                        sx={{
+                          width: '100%',
+                          height: 580,
+                          border: '1px solid #ddd',
+                          borderRadius: 2,
+                          overflow: 'hidden',
+                        }}
+                      >
+                        {previewUrl && (
+                          <iframe
+                            title="Preview Template"
+                            ref={iframeRef} //tambahan coba
+                            src={previewUrl}
+                            width="100%"
+                            height="100%"
+                            style={{
+                              border: 'none',
+                            }}
+                                onLoad={() => {
+                                  iframeRef.current?.contentWindow?.postMessage({
+                                      ...values,
+                                      url_photo_male:
+                                          malePhoto
+                                              ? URL.createObjectURL(malePhoto)
+                                              : assetsRemoteUrl(values.url_photo_male),
+
+                                      url_photo_female:
+                                          femalePhoto
+                                              ? URL.createObjectURL(femalePhoto)
+                                              : assetsRemoteUrl(values.url_photo_female),
+                                  }, "*");
+                              }}
+                          />
+                        )}
+                      </Box>
                     </Grid>
                   </Grid>
                   <Divider sx={{ marginTop: 4 }} />
