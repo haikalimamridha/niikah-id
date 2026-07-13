@@ -474,3 +474,67 @@ func (apiCfg ApiConfig) HandlerGetInvitation(w http.ResponseWriter, r *http.Requ
 		"items": resp,
 	})
 }
+
+func (apiCfg ApiConfig) HandlerDeleteInvitation(w http.ResponseWriter, r *http.Request) {
+	userID, ok := r.Context().Value(auth.UserIDKey).(int32)
+	if !ok {
+		respondWithError(w, 401, "invalid user context")
+		return
+	}
+
+	invitationIDstr := chi.URLParam(r, "id")
+	invitationID, err := strconv.Atoi(invitationIDstr)
+	if err != nil {
+		respondWithError(w, 400, "invalid invitation id")
+		return
+	}
+
+	//start transaction
+	tx, err := apiCfg.DBConn.BeginTx(r.Context(), nil)
+	if err != nil {
+		respondWithError(w, 500, "failed to start transaction")
+		return
+	}
+	defer tx.Rollback()
+
+	qtx := apiCfg.DB.WithTx(tx)
+
+	//pastikan invitation milik user
+	invitation, err := qtx.GetInvitationByID(r.Context(), int32(invitationID))
+	if err != nil {
+		respondWithError(w, 404, "invitation not found")
+		return
+	}
+
+	if invitation.OwnerID != userID {
+		respondWithError(w, 403, "forbidden")
+		return
+	}
+
+	//delete invitation
+	if err := qtx.DeleteInvitation(r.Context(), int32(invitationID)); err != nil {
+		respondWithError(w, 500, "failed to delete invitation")
+		return
+	}
+
+	// //delete invitationt content
+	// if err := qtx.DeleteinvitationContentByInvitationID(r.Context(), int32(invitationID)); err != nil {
+	// 	respondWithError(w, 500, "failed to delete invitation content")
+	// 	return
+	// }
+
+	//make folder path
+	ownerFolder := fmt.Sprintf("./uploads/user_%d", userID)
+	invitationFolder := path.Join(ownerFolder, fmt.Sprintf("invitation_%d", invitation.ID))
+
+	if err := tx.Commit(); err != nil {
+		respondWithError(w, 500, "failed commit transaction")
+		return
+	}
+
+	_ = os.RemoveAll(invitationFolder)
+
+	respondWithJSON(w, 200, map[string]interface{}{
+		"message": "invitation deleted",
+	})
+}

@@ -88,6 +88,16 @@ func (q *Queries) CreateInvitationContent(ctx context.Context, arg CreateInvitat
 	return i, err
 }
 
+const deleteinvitationContentByInvitationID = `-- name: DeleteinvitationContentByInvitationID :exec
+DELETE FROM invitation_contents
+WHERE invitation_id = $1
+`
+
+func (q *Queries) DeleteinvitationContentByInvitationID(ctx context.Context, invitationID int32) error {
+	_, err := q.db.ExecContext(ctx, deleteinvitationContentByInvitationID, invitationID)
+	return err
+}
+
 const updateInvitationContent = `-- name: UpdateInvitationContent :one
 UPDATE invitation_contents
 SET

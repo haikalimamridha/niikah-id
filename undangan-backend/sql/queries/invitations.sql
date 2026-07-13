@@ -15,10 +15,9 @@ INSERT INTO invitations (
     package_id,
     template_name,
     is_published,
-    is_active,
-    expired_at
+    is_active
 )
-VALUES ($1,$2,$3,$4,$5,$6,$7)
+VALUES ($1,$2,$3,$4,$5,$6)
 RETURNING *;
 
 -- name: GetInvitationBySubdomain :one
@@ -42,3 +41,7 @@ SET
     updated_at = NOW()
 WHERE id = $1
 RETURNING *;
+
+-- name: DeleteInvitation :exec
+DELETE FROM invitations
+WHERE id = $1;

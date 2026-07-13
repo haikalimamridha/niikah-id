@@ -37,3 +37,7 @@ SET
     updated_at = NOW()
 WHERE invitation_id = $1
 RETURNING *;
+
+-- name: DeleteinvitationContentByInvitationID :exec
+DELETE FROM invitation_contents
+WHERE invitation_id = $1;

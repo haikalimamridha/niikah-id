@@ -18,10 +18,9 @@ INSERT INTO invitations (
     package_id,
     template_name,
     is_published,
-    is_active,
-    expired_at
+    is_active
 )
-VALUES ($1,$2,$3,$4,$5,$6,$7)
+VALUES ($1,$2,$3,$4,$5,$6)
 RETURNING id, subdomain, owner_id, package_id, template_name, is_published, is_active, expired_at, created_at, updated_at
 `
 
@@ -32,7 +31,6 @@ type CreateInvitationParams struct {
 	TemplateName sql.NullString
 	IsPublished  bool
 	IsActive     bool
-	ExpiredAt    time.Time
 }
 
 func (q *Queries) CreateInvitation(ctx context.Context, arg CreateInvitationParams) (Invitation, error) {
@@ -43,7 +41,6 @@ func (q *Queries) CreateInvitation(ctx context.Context, arg CreateInvitationPara
 		arg.TemplateName,
 		arg.IsPublished,
 		arg.IsActive,
-		arg.ExpiredAt,
 	)
 	var i Invitation
 	err := row.Scan(
@@ -59,6 +56,16 @@ func (q *Queries) CreateInvitation(ctx context.Context, arg CreateInvitationPara
 		&i.UpdatedAt,
 	)
 	return i, err
+}
+
+const deleteInvitation = `-- name: DeleteInvitation :exec
+DELETE FROM invitations
+WHERE id = $1
+`
+
+func (q *Queries) DeleteInvitation(ctx context.Context, id int32) error {
+	_, err := q.db.ExecContext(ctx, deleteInvitation, id)
+	return err
 }
 
 const getInvitationByID = `-- name: GetInvitationByID :one

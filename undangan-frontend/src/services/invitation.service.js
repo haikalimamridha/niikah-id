@@ -11,7 +11,7 @@ export const generateInvitationSite = async (invitationId) => {
 };
 
 export const deleteInvitation = async (id) => {
-  const res = await Api().delete(`invitations/${id}`);
+  const res = await Api().delete(`/v1/invitations/${id}`);
   feedBack.openSuccessFeedback('Undangan berhasil dihapus');
   return res;
 };

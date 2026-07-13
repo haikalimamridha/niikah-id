@@ -74,6 +74,7 @@ func main() {
 		r.Patch("/invitations/{id}", apiCfg.HandlerUpdateInvitation)   //update undangan
 		r.Post("/validate/subdomain", apiCfg.HandlerValidateSubdomain) // check subdomain sudah dipakai atau belum
 		r.Get("/invitations", apiCfg.HandlerGetInvitation)             // menampilkan semua undangan yg dibuat user
+		r.Delete("/invitations/{id}", apiCfg.HandlerDeleteInvitation)  // delete invitation
 
 	})
 

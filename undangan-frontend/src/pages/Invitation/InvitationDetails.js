@@ -133,7 +133,11 @@ export default function InvitationDetails({ data }) {
 
   const openInvitationSite = (e) => {
     e.stopPropagation();
-    window.open(`https://${data?.subdomain}.niikah.id`, '_blank');
+    // window.open(`https://${data?.subdomain}.niikah.id`, '_blank');
+    const activeTemp = find(templates, { name: values.template_name });
+      if (activeTemp) {
+        window.open(assetsRemoteUrl(activeTemp.preview), '_blank');
+      }
   };
 
   const renderMusicFileLabel = () => {
