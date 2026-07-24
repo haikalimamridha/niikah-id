@@ -476,7 +476,7 @@
             });
 
             // handle countdown
-            var countDownDate = new Date("2021-11-04T08:00:00.000+07:00").getTime();
+            var countDownDate = new Date(data.content.event_date).getTime();;
 
             // Update the count down every 1 second
             var x = setInterval(function() {
@@ -554,6 +554,39 @@
             });
 
         });
+
+        // function updatePage(data){
+
+        //     document.getElementById("cover-male").innerText =
+        //         data.content.male_name;
+
+        //     document.getElementById("cover-female").innerText =
+        //         data.content.female_name;
+
+        //     document.getElementById("cover-date").innerText =
+        //         data.content.event_date;
+
+        // }
+
+        // async function loadInvitation() {
+
+        //     const subdomain =
+        //         window.location.hostname.split(".")[0];
+
+        //     const res = await fetch(
+        //         `http://localhost:8080/api/invitations/${subdomain}`
+        //     );
+
+        //     const json = await res.json();
+
+        //     const invitation = json.item;
+
+        //     renderInvitation(invitation);
+        //     // updatePage(invitation);
+
+        // }
+
+        // window.onload = loadInvitation;
     </script>
 </body>
 

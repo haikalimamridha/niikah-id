@@ -4,9 +4,11 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/cors"
+	"github.com/go-chi/httprate"
 	"github.com/haikalimamridha/niikah/config"
 	"github.com/haikalimamridha/niikah/internal/auth"
 	"github.com/haikalimamridha/niikah/internal/database"
@@ -37,7 +39,10 @@ func main() {
 	router := chi.NewRouter()
 
 	router.Use(cors.Handler(cors.Options{
-		AllowedOrigins:   []string{"http://localhost:3000"},
+		AllowedOrigins: []string{
+			"http://localhost:3000",
+			"https://lake-reuters-hobby-myself.trycloudflare.com",
+		},
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH", "HANDLE"},
 		AllowedHeaders:   []string{"*"},
 		ExposedHeaders:   []string{"Link"},
@@ -48,13 +53,15 @@ func main() {
 	v1Router := chi.NewRouter()
 	v1Router.Get("/healthz", handler.HandlerReadiness)
 	v1Router.Get("/err", handler.HandlerErr)
-	v1Router.Post("/auth/register", apiCfg.HandlerCreateUser)
+	v1Router.With(httprate.LimitBy(100, time.Minute, func(r *http.Request) (string, error) { return httprate.CanonicalizeIP(r.RemoteAddr), nil })).Post("/auth/register", apiCfg.HandlerCreateUser)
 	v1Router.Post("/auth/login", apiCfg.HandlerLogin)
 	v1Router.Get("/users", apiCfg.HandleGetUser)
 	v1Router.Get("/templates", apiCfg.HandlerGetTemplates) //get all templates
 	v1Router.Get("/packages", apiCfg.HandlerGetPackages)   //get all packages (paket)
+	v1Router.Post("/payments/midtrans/notification", apiCfg.HandlerMidtransNotification)
 	v1Router.Handle("/uploads/*", http.StripPrefix("/v1/uploads", http.FileServer(http.Dir("./uploads"))))
 	v1Router.Handle("/template/*", http.StripPrefix("/v1/template", http.FileServer(http.Dir("../template"))))
+	// v1Router.Get("/{subdomain}", apiCfg.HandlerGenerateInvitation)
 
 	v1Router.Group(func(r chi.Router) {
 		r.Use(auth.AuthMiddleware)
@@ -75,6 +82,9 @@ func main() {
 		r.Post("/validate/subdomain", apiCfg.HandlerValidateSubdomain) // check subdomain sudah dipakai atau belum
 		r.Get("/invitations", apiCfg.HandlerGetInvitation)             // menampilkan semua undangan yg dibuat user
 		r.Delete("/invitations/{id}", apiCfg.HandlerDeleteInvitation)  // delete invitation
+		r.Get("/invoices/my-invoice", apiCfg.HandlerGetMyInvoice)
+		r.Post("/invoices/{invoiceId}/midtrans/transaction", apiCfg.HandlerCreateMidtransTransaction)
+		r.Post("/invitations/{invitationId}/generate", apiCfg.HandlerGenerateInvitation)
 
 	})
 

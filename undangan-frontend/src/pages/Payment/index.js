@@ -1,15 +1,27 @@
 import { useState } from 'react';
-import { Container, Stack, Typography, Portal } from '@mui/material';
+import { Container, Stack, Typography } from '@mui/material';
 // components
 import Page from 'src/components/Page';
 import InvoiceTable from './table';
-import UploadInvoiceModal from './UploadInvoiceModal';
+import useFeedbackState from 'src/store/feedback.state';
+import { createMidtransTransaction } from 'src/services/invoice.service';
 
 export default function Guest() {
-  const [invitationId, setInvitationId] = useState(false);
+  const [payingInvoiceId, setPayingInvoiceId] = useState(null);
+  const feedBack = useFeedbackState.getState();
 
-  const toggleModal = (id) => {
-    setInvitationId(Boolean(id) ? id : null);
+  const onPayNow = async (item) => {
+    setPayingInvoiceId(item.id);
+    try {
+      const payment = await createMidtransTransaction(item.id);
+      if (!payment?.redirect_url) {
+        feedBack.openErrorFeedback('Gagal menyiapkan pembayaran');
+        return;
+      }
+      window.location.assign(payment.redirect_url);
+    } finally {
+      setPayingInvoiceId(null);
+    }
   };
 
   return (
@@ -20,11 +32,8 @@ export default function Guest() {
             Daftar Tagihan
           </Typography>
         </Stack>
-        <InvoiceTable onTriggerUploadModal={toggleModal} />
+        <InvoiceTable onPayNow={onPayNow} payingInvoiceId={payingInvoiceId} />
       </Container>
-      <Portal>
-        <UploadInvoiceModal isOpen={Boolean(invitationId)} invitationId={invitationId} onClose={toggleModal} />
-      </Portal>
     </Page>
   );
 }

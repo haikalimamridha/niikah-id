@@ -98,6 +98,39 @@ func (q *Queries) DeleteinvitationContentByInvitationID(ctx context.Context, inv
 	return err
 }
 
+const getInvitationContentByInvitationID = `-- name: GetInvitationContentByInvitationID :one
+SELECT id, invitation_id, title, male_name, female_name, male_nickname, female_nickname, male_parents, female_parents, url_photo_male, url_photo_female, url_photo_main, url_bg_music, url_youtube, broadcast_template, quote, created_at, updated_at
+FROM invitation_contents
+WHERE invitation_id = $1
+LIMIT 1
+`
+
+func (q *Queries) GetInvitationContentByInvitationID(ctx context.Context, invitationID int32) (InvitationContent, error) {
+	row := q.db.QueryRowContext(ctx, getInvitationContentByInvitationID, invitationID)
+	var i InvitationContent
+	err := row.Scan(
+		&i.ID,
+		&i.InvitationID,
+		&i.Title,
+		&i.MaleName,
+		&i.FemaleName,
+		&i.MaleNickname,
+		&i.FemaleNickname,
+		&i.MaleParents,
+		&i.FemaleParents,
+		&i.UrlPhotoMale,
+		&i.UrlPhotoFemale,
+		&i.UrlPhotoMain,
+		&i.UrlBgMusic,
+		&i.UrlYoutube,
+		&i.BroadcastTemplate,
+		&i.Quote,
+		&i.CreatedAt,
+		&i.UpdatedAt,
+	)
+	return i, err
+}
+
 const updateInvitationContent = `-- name: UpdateInvitationContent :one
 UPDATE invitation_contents
 SET

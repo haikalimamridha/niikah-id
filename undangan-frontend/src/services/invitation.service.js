@@ -6,7 +6,8 @@ import { queryClient } from 'src/App';
 const feedBack = useFeedbackState.getState();
 
 export const generateInvitationSite = async (invitationId) => {
-  await Api().post(`invitations/${invitationId}/template/export`);
+  // await Api().post(`invitations/${invitationId}/template/export`);
+  await Api().post(`/v1/invitations/${invitationId}/generate`);
   feedBack.openSuccessFeedback('Undanganmu selesai di-generate');
 };
 

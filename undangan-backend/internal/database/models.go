@@ -140,6 +140,7 @@ type Invoice struct {
 	ConfirmedAt    sql.NullTime
 	CreatedAt      time.Time
 	UpdatedAt      time.Time
+	Status         string
 }
 
 type Package struct {

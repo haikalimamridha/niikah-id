@@ -152,48 +152,73 @@ func (apiCfg ApiConfig) HandlerCreateInvitation(w http.ResponseWriter, r *http.R
 	})
 }
 
-// func (apiCfg ApiConfig) HandlerGenerateInvitation(w http.ResponseWriter, r *http.Request) {
-// 	invitationIDstr := chi.URLParam(r, "invitationId")
+func (apiCfg ApiConfig) HandlerGenerateInvitation(w http.ResponseWriter, r *http.Request) {
+	userID, ok := r.Context().Value(auth.UserIDKey).(int32)
+	if !ok {
+		respondWithError(w, 401, "invalid user")
+		return
+	}
 
-// 	invitationID, err := strconv.Atoi(invitationIDstr)
-// 	if err != nil {
-// 		respondWithError(w, 401, "convert to int fail")
-// 	}
+	invitationIdStr := chi.URLParam(r, "invitationId")
+	invitationId, err := strconv.Atoi(invitationIdStr)
+	if err != nil {
+		respondWithError(w, 400, "invalid invitation id")
+		return
+	}
 
-// 	invitation, err := apiCfg.DB.GetInvitationByID(r.Context(), int32(invitationID))
-// 	if err != nil {
-// 		respondWithError(w, 401, "couldnt fetch invitation")
-// 		return
-// 	}
+	//transaksi database
+	tx, err := apiCfg.DBConn.BeginTx(r.Context(), nil)
+	if err != nil {
+		respondWithError(w, 500, "failed to start transaction")
+		return
+	}
+	defer tx.Rollback()
 
-// 	content, err := apiCfg.DB.GetInvitationContentByID(r.Context(), int32(invitationID))
-// 	if err != nil {
-// 		respondWithError(w, 401, "couldnt fetch invitation content")
-// 		return
-// 	}
+	qtx := apiCfg.DB.WithTx(tx)
 
-// 	templatePath := "template/" + invitation.TemplateName.String + "/index.html"
+	invitation, err := qtx.GetInvitationByID(r.Context(), int32(invitationId))
+	if err != nil {
+		respondWithError(w, 404, "Invitation content not found")
+		return
+	}
+	if invitation.OwnerID != userID {
+		respondWithError(w, 403, "forbidden")
+		return
+	}
 
-// 	tpl, err := template.ParseFiles(templatePath)
-// 	if err != nil {
-// 		respondWithError(w, 500, "template error")
-// 		return
-// 	}
+	//cek apakah invoice sudah ada (sudah di generate)
+	_, invoiceErr := qtx.GetInvoicesByInvitationID(r.Context(), sql.NullInt32{Int32: int32(invitationId), Valid: true})
+	if invoiceErr == nil {
+		respondWithError(w, 400, "invoice already generated")
+		return
+	}
 
-// 	outputDir := "public/" + invitation.Subdomain
+	//ambil harga package
+	pkg, err := qtx.GetPackageByID(r.Context(), invitation.PackageID.Int32)
+	if err != nil {
+		respondWithError(w, 404, "package not found")
+		return
+	}
 
-// 	os.MkdirAll(outputDir, 0755)
+	//create invoice
+	invoice, err := qtx.CreateInvoice(r.Context(), database.CreateInvoiceParams{
+		UserID:         sql.NullInt32{Int32: userID, Valid: true},
+		InvitationID:   sql.NullInt32{Int32: int32(invitationId), Valid: true},
+		TotalPrice:     pkg.Price,
+		PaymentDueDate: time.Now().AddDate(0, 0, 1),
+		Status:         "not_paid",
+	})
 
-// 	outFile, _ := os.Create(outputDir + "/index.html")
+	if err := tx.Commit(); err != nil {
+		respondWithError(w, 500, "failed to commit transaction")
+		return
+	}
 
-// 	defer outFile.Close()
-
-// 	tpl.Execute(outFile, content)
-
-// 	respondWithJSON(w, 200, map[string]string{
-// 		"message": "generated",
-// 	})
-// }
+	respondWithJSON(w, 200, map[string]interface{}{
+		"message": "invoice generated",
+		"items":   invoice,
+	})
+}
 
 func (apiCfg ApiConfig) HandlerUpdateInvitation(w http.ResponseWriter, r *http.Request) {
 	userID, ok := r.Context().Value(auth.UserIDKey).(int32)

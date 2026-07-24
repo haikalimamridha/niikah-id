@@ -41,3 +41,9 @@ RETURNING *;
 -- name: DeleteinvitationContentByInvitationID :exec
 DELETE FROM invitation_contents
 WHERE invitation_id = $1;
+
+-- name: GetInvitationContentByInvitationID :one
+SELECT *
+FROM invitation_contents
+WHERE invitation_id = $1
+LIMIT 1;
